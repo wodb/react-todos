@@ -2,13 +2,8 @@ import React,{Component} from 'react'
 import ReactDOM from 'react-dom'
 
 export default class TodoForm extends Component {
-    constructor(props,state) {
-        super(props,state)
-        console.log(state);
-    }
-
-    generateId() {
-        return Math.floor(Math.random() * 9000) + 1000;
+    constructor(props) {
+        super(props)
     }
 
     submitTask(e) {
@@ -17,9 +12,11 @@ export default class TodoForm extends Component {
         e.stopPropagation();
 
         // 获得到用户输入的数据
-        var value = this.refs.task.value.trim();
-        data.push({"id": this.generateId, "task": value})
+        var value = this.refs.task.value;
+        //console.log(value);
+        this.props.handleCilck(value)
     }
+
 
     render() {
         return (

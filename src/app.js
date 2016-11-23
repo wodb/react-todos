@@ -17,13 +17,25 @@ class App extends Component {
         }
     }
 
+    generateId() {
+        return Math.floor(Math.random() * 9000) + 1000;
+    }
+
+    handleSubmit(task) {
+        var data = this.state.data;
+        console.log(data)
+        //var id = this.generateId;
+        //data = data.concat([{"id": id, "task": task}]);
+        //console.log(data)
+        //this.setState({data});
+    }
+
     render() {
-        //console.log(this.state.data)
         return (
             <div className='col-md-6 col-md-offset-3 well'>
                 <Home />
                 <TodoList data={this.state.data}/>
-                <TodoForm data={this.state.data}/>
+                <TodoForm handleCilck={this.handleSubmit.bind(this)}/>
             </div>
         )
     }
