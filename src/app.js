@@ -10,9 +10,9 @@ class App extends Component {
         super(props)
         this.state = {
             data: [
-                {"id": "0001", "task": "吃饭"},
-                {"id": "0002", "task": "睡觉"},
-                {"id": "0003", "task": "打豆豆"},
+                {"id": "0001", "task": "吃饭","completed":false},
+                {"id": "0002", "task": "睡觉","completed":false},
+                {"id": "0003", "task": "打豆豆","completed":false},
             ]
         }
     }
@@ -20,7 +20,7 @@ class App extends Component {
     handleSubmit(task) {
         var data = this.state.data;
         console.log(data)
-        data = data.concat([{"id": Date.now(), "task": task}]);
+        data = data.concat([{"id": Date.now(), "task": task,"completed":false}]);
         console.log(data)
         this.setState({data});
     }
@@ -28,13 +28,14 @@ class App extends Component {
     handleDelet(id) {
         var arr = this.state.data;
         var index = function (id) {
-            for (var i = 0,j = arr.length; i < j; i++) {
-                if (arr[i].id === id) {
+            for (var i = 0;i < arr.length; i++) {
+                // 用相等就好，如果是全等新生成的ID是number所以有一个小bug
+                if (arr[i].id == id) {
                     return i
                 }
             }
         }
-        arr.splice(index,1)
+        arr.splice(index(id),1)
         this.setState({arr});
     }
 

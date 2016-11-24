@@ -18,7 +18,8 @@ export default class ItemLi extends Component {
     // 点击删除此条数据
     handleDelet(e) {
         var id = e.target.parentNode.parentNode.getAttribute('data-id')
-        this.props.handleDelet(this,id)
+        console.log(id,'ItemLi中')
+        this.props.handleDelet(id)
     }
 
     render() {
