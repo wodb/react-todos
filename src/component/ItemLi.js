@@ -18,20 +18,31 @@ export default class ItemLi extends Component {
     // 点击删除此条数据
     handleDelet(e) {
         var id = e.target.parentNode.parentNode.getAttribute('data-id')
-        console.log(id,'ItemLi中')
+        console.log(id, 'ItemLi中')
         this.props.handleDelet(id)
+    }
+
+    handleClick(e) {
+        var bool = e.target.checked;
+        var id = e.target.parentNode.getAttribute('data-id')
+        console.log(bool,id)
+        this.props.handleCompleted(id,bool)
     }
 
     render() {
         // 获得TodoList中的数据
         var items = this.props.items;
+        // 修改class名称
+        var className = items.completed ? 'list-group-item list-group-item-success' : 'list-group-item';
         return (
-            <li className='list-group-item' onMouseOver={this.handleover.bind(this)}
+            <li className={className} onMouseOver={this.handleover.bind(this)}
                 onMouseOut={this.handleMouse.bind(this)} data-id={items.id}>
-                <input type="checkbox" className="pull-left"/>
-                {items.task}
+                <input type="checkbox" className="pull-left" onClick={this.handleClick.bind(this)} defaultChecked={items.completed} />
+                <span>{items.task}</span>
                 <div className="pull-right">
-                    <button type="button" className="btn btn-xs close" ref="deleteBtn" onClick={this.handleDelet.bind(this)}>删除</button>
+                    <button type="button" className="btn btn-xs close" ref="deleteBtn"
+                            onClick={this.handleDelet.bind(this)}>删除
+                    </button>
                 </div>
             </li>
         )

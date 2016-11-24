@@ -8,23 +8,25 @@ export default class TodoList extends Component {
 
     render() {
         var _this = this;
-        // 查询完成的数量
-        var count = 0;
-        for (var i = 0; i < this.props.data.length; i++) {
-            var item = this.props.data[i]
-            if (item.completed) {
-                count++;
-            }
-        }
+
+        var statistics = {
+            // 统计任务总数及完成的数量
+            todoCount: this.props.data.length || 0,
+            todoCompleteCount: this.props.data.filter(function(item) {
+                return item.completed === true;
+            }).length
+        };
+
         var result = this.props.data.map(function (items) {
             return (
-                <ItemLi items={items} key={items.id} handleDelet={_this.props.handleDelet}/>
+                <ItemLi items={items} key={items.id} handleDelet={_this.props.handleDelet} handleCompleted={_this.props.handleCompleted}/>
             )
         })
+        // 渲染组件
         return (
             <ul className='list-group'>
                 {result}
-                <li className="list-group-item">{count}已完成 / {this.props.data.length}总数</li>
+                <li className="list-group-item">{statistics.todoCompleteCount}已完成 / {statistics.todoCount}总数</li>
             </ul>
         )
     }

@@ -12,7 +12,8 @@ class App extends Component {
             data: [
                 {"id": "0001", "task": "吃饭","completed":false},
                 {"id": "0002", "task": "睡觉","completed":false},
-                {"id": "0003", "task": "打豆豆","completed":false},
+                {"id": "0003", "task": "打豆豆","completed":true},
+                {"id": "0004", "task": "荷花","completed":false},
             ]
         }
     }
@@ -39,11 +40,27 @@ class App extends Component {
         this.setState({arr});
     }
 
+    handleCompleted(id,bool) {
+        console.log(id);
+        console.log(bool);
+        var data = this.state.data
+        var index = null;
+        for (let i = 0; i < data.length; i++) {
+            let item = data[i];
+            if (item.id == id){
+                index = i;
+            }
+        }
+        data[index].completed = bool
+        console.log(data[index]);
+        this.setState(data)
+    }
+
     render() {
         return (
             <div className='col-md-6 col-md-offset-3 well'>
                 <Home />
-                <TodoList data={this.state.data} handleDelet={this.handleDelet.bind(this)}/>
+                <TodoList data={this.state.data} handleDelet={this.handleDelet.bind(this)} handleCompleted={this.handleCompleted.bind(this)}/>
                 <TodoForm handleCilck={this.handleSubmit.bind(this)}/>
             </div>
         )

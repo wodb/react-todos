@@ -18,3 +18,7 @@ button.close {
     height: 18px;
     width: 18px;
 }
+
+.list-group-item-success span{
+    text-decoration:line-through
+}
