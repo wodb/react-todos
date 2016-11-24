@@ -7,9 +7,10 @@ export default class TodoList extends Component {
     }
 
     render() {
+        var _this = this
         var result = this.props.data.map(function (items) {
             return (
-                <ItemLi items={items} key={items.id}/>
+                <ItemLi items={items} key={items.id} handleDelet={_this.props.handleDelet}/>
             )
         })
         return (

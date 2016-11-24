@@ -12,9 +12,13 @@ export default class TodoForm extends Component {
         e.stopPropagation();
 
         // 获得到用户输入的数据
-        var value = this.refs.task.value;
-        //console.log(value);
-        this.props.handleCilck(value)
+        var value = this.refs.task;
+        var trim_val = value.value.trim();
+        if (!trim_val) {
+            return
+        }
+        this.props.handleCilck(trim_val)
+        value.value = ''
     }
 
 

@@ -17,24 +17,32 @@ class App extends Component {
         }
     }
 
-    generateId() {
-        return Math.floor(Math.random() * 9000) + 1000;
-    }
-
     handleSubmit(task) {
         var data = this.state.data;
         console.log(data)
-        //var id = this.generateId;
-        //data = data.concat([{"id": id, "task": task}]);
-        //console.log(data)
-        //this.setState({data});
+        data = data.concat([{"id": Date.now(), "task": task}]);
+        console.log(data)
+        this.setState({data});
+    }
+
+    handleDelet(id) {
+        var arr = this.state.data;
+        var index = function (id) {
+            for (var i = 0,j = arr.length; i < j; i++) {
+                if (arr[i].id === id) {
+                    return i
+                }
+            }
+        }
+        arr.splice(index,1)
+        this.setState({arr});
     }
 
     render() {
         return (
             <div className='col-md-6 col-md-offset-3 well'>
                 <Home />
-                <TodoList data={this.state.data}/>
+                <TodoList data={this.state.data} handleDelet={this.handleDelet.bind(this)}/>
                 <TodoForm handleCilck={this.handleSubmit.bind(this)}/>
             </div>
         )
